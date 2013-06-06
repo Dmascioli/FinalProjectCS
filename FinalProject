@@ -1,0 +1,222 @@
+/**
+ *Darren Mascioli
+ *6/7/13
+ *FinalProject
+ */
+ import javax.swing.*;
+ import java.awt.event.*;
+ import java.awt.*;
+ import java.awt.Image;
+public class FinalProject2 implements ActionListener{
+  JFrame frame1=new JFrame();
+    JPanel panel1=new JPanel();
+    JFrame frame2=new JFrame();
+    JPanel panel2=new JPanel();
+    
+    JButton redScore=new JButton();
+    JButton blueScore=new JButton();
+    JFrame frame3=new JFrame();
+    JPanel panel3=new JPanel();
+    
+    JButton startbtn=new JButton("Start Game");
+    JButton resetbtn=new JButton("Reset Game");
+    JLabel label1=new JLabel("Round Number: ", JLabel.CENTER);
+    JButton playerTurn=new JButton();
+    JButton btns[]=new JButton[16];
+    
+    public static void main(String[] args) {
+		new FinalProject2();
+    }
+    ImageIcon red=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/red_balloon.jpg");
+    ImageIcon orange=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/orange_balloon.jpg");
+	ImageIcon yellow=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/yellow_balloon.jpg");
+	ImageIcon green=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/green_balloon.jpg");
+	ImageIcon blue=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/blue_balloon.jpg");
+	ImageIcon purple=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/purple_balloon.jpg");
+	ImageIcon white=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/white_balloon.jpg");
+	ImageIcon black=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/black_balloon.jpg");
+	
+    public FinalProject2() {
+    	frame1.setSize(800,800);
+    	frame1.setLocation(50,50);
+    	frame1.setResizable(false);
+    	frame1.setTitle("Memory Game");
+    	panel1.setLayout(new GridLayout(4,4));
+    	
+    	for(int a=0; a<16; a++)
+    	{
+    		btns[a]=new JButton();
+    		btns[a].setIcon(red);
+    		btns[a].setEnabled(false);
+    		btns[a].addActionListener(this);
+    		panel1.add(btns[a]);
+    	}
+    	startbtn.addActionListener(this);
+    	resetbtn.addActionListener(this);
+    	
+    	frame1.add(panel1);
+    	
+    	frame2.setSize(300,300);
+    	frame2.setLocation(875,50);
+    	frame2.setResizable(false);
+    	frame2.setTitle("Scoreboard");
+    	
+    	frame3.setSize(300,150);
+    	frame3.setLocation(875, 350);
+    	frame3.setResizable(false);
+    	frame3.setTitle("Controls");
+    	
+    	panel2.setLayout(new GridLayout(1,2));
+    	panel3.setLayout(new GridLayout(4,1));
+    	
+    	redScore.setBackground(Color.red);
+    	redScore.setForeground(Color.white);
+    	redScore.setText("Red Score");
+    	blueScore.setBackground(Color.blue);
+    	blueScore.setForeground(Color.white);
+    	blueScore.setText("Blue Score");
+    	playerTurn.setText("Turn");
+    	playerTurn.setBackground(Color.blue);
+    	playerTurn.setForeground(Color.white);
+    	playerTurn.addActionListener(this);
+    	
+    	panel2.add(redScore);
+    	panel2.add(blueScore);
+    	panel3.add(startbtn);
+    	panel3.add(resetbtn);
+    	panel3.add(label1);
+    	panel3.add(playerTurn);
+    	
+    	frame2.add(panel2);
+    	frame3.add(panel3);
+    	
+    	frame1.setVisible(true);
+    	frame2.setVisible(true);
+    	frame3.setVisible(true);
+    	frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    int round=0, player=1, turn, bScore=0, rScore=0, flipped=0, card1=0;
+    public void actionPerformed(ActionEvent e) {
+    	int btn, color;
+    	turn=player%2;
+    		if(turn==1)
+    		{
+    			playerTurn.setBackground(Color.blue);
+    		}
+    		else
+    		{
+    			playerTurn.setBackground(Color.red);
+    		}
+    	if(e.getSource()==startbtn)
+    	{
+    		startbtn.setText("Next Round");
+    		round++;
+    		label1.setText("Round Number: " +round+"");
+    		
+    		for(int b=0; b<16; b++)
+    		{
+    			btns[b].setIcon(null);
+    			btns[b].setEnabled(true);
+    		}
+    	}
+    	for(int c=0; c<16; c++)
+    	{
+    		if(e.getSource()==btns[c])
+    		{
+    			btn=c;
+    			color=whatColor(btn);
+				color=color%8;
+				flipped++;
+				if(color==1)
+				{
+					btns[c].setIcon(red);
+				}
+				if(color==2)
+				{
+					btns[c].setIcon(orange);
+				}
+				if(color==3)
+				{
+					btns[c].setIcon(yellow);
+				}
+				if(color==4)
+				{
+					btns[c].setIcon(green);
+				}
+				if(color==5)
+				{
+					btns[c].setIcon(blue);
+				}
+				if(color==6)
+				{
+					btns[c].setIcon(purple);
+				}
+				if(color==7)
+				{
+					btns[c].setIcon(black);
+				}
+				if(color==0)
+				{
+					btns[c].setIcon(white);
+				}
+				if(flipped==1)
+				{
+					card1=c;
+				}
+				if(flipped==2)
+				{
+					cardMatch(card1, c);
+				}
+    		}
+    	}
+    		if(e.getSource()==resetbtn)
+    		{
+    			frame1.dispose();
+	    		frame2.dispose();
+	    		frame3.dispose();
+    			new FinalProject2();
+    		}
+    	}
+    
+    
+    public int whatColor(int btn){
+    	int finalcolor=1;
+    	int colors[]=new int[16];
+    	
+    	for(int a=0; a<16; a++)
+    	{
+    		colors[a]=a;
+    	}
+    	finalcolor=colors[btn];
+    	return finalcolor;
+    }
+    
+    public void cardMatch(int card1, int card2) {
+    	if(btns[card1].getIcon() == btns[card2].getIcon())
+    	{
+    		btns[card1].setEnabled(false);
+    		btns[card2].setEnabled(false);
+    		
+    		if(turn==0)
+    		{
+    			rScore++;
+    			redScore.setText("Red Score: "+rScore);
+    		}
+    		else
+    		{
+    			bScore++;
+    			blueScore.setText("Blue Score: "+bScore);
+    		}
+    	}
+    	else
+    	{
+    		btns[card1].setIcon(null);
+    		btns[card2].setIcon(null);
+    	}
+    	flipped=0;
+    	player++;
+    	playerTurn.doClick();
+    }
+}
