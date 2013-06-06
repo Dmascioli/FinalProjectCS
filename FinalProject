@@ -8,7 +8,7 @@
  import java.awt.*;
  import java.awt.Image;
 public class FinalProject2 implements ActionListener{
-  JFrame frame1=new JFrame();
+    JFrame frame1=new JFrame();
     JPanel panel1=new JPanel();
     JFrame frame2=new JFrame();
     JPanel panel2=new JPanel();
@@ -25,10 +25,10 @@ public class FinalProject2 implements ActionListener{
     JButton btns[]=new JButton[16];
     
     public static void main(String[] args) {
-		new FinalProject2();
+	new FinalProject2();
     }
-    ImageIcon red=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/red_balloon.jpg");
-    ImageIcon orange=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/orange_balloon.jpg");
+    	ImageIcon red=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/red_balloon.jpg");
+    	ImageIcon orange=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/orange_balloon.jpg");
 	ImageIcon yellow=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/yellow_balloon.jpg");
 	ImageIcon green=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/green_balloon.jpg");
 	ImageIcon blue=new ImageIcon("C:/Documents and Settings/16dmascioli/Desktop/Balloons/blue_balloon.jpg");
@@ -45,9 +45,9 @@ public class FinalProject2 implements ActionListener{
     	
     	for(int a=0; a<16; a++)
     	{
-    		btns[a]=new JButton();
-    		btns[a].setIcon(red);
-    		btns[a].setEnabled(false);
+		btns[a]=new JButton();
+		btns[a].setIcon(red);
+		btns[a].setEnabled(false);
     		btns[a].addActionListener(this);
     		panel1.add(btns[a]);
     	}
